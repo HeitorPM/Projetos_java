@@ -1,0 +1,22 @@
+package repositories;
+
+import java.io.PrintWriter;
+
+import entities.Cliente;
+
+public class ClienteRepository {
+
+	//metodo para exportar os dados do cliente para um arquivo de extensao .txt
+	
+	public void gravarArquivo(Cliente cliente) {
+		
+		PrintWriter printWriter = new PrintWriter(new FIle("c:\\temp\\cliente.txt"));
+		
+		printWriter.write("\nDADOS DO CLIENTE:");
+		printWriter.write("\tId do CLiente.....: "cliente.getIdCliente());
+		printWriter.write("\tNome do CLiente...: "cliente.getNome());
+		printWriter.write("\tEmail do CLiente..: "cliente.getEmail);
+		printWriter.write("\tCpf do CLiente....: "cliente.getCpf);
+		
+	}                         
+}

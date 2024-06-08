@@ -1,0 +1,42 @@
+package entities;
+
+import java.util.Date;
+
+public class Funcionario {
+
+	private String matricula;
+	private Double salario;
+	private Date dataAdmissao;
+
+	public Funcionario(String matricula, Double salario, Date dataAdmissao) {
+		super();
+		this.matricula = matricula;
+		this.salario = salario;
+		this.dataAdmissao = dataAdmissao;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public Double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(Double salario) {
+		this.salario = salario;
+	}
+
+	public Date getDataAdmissao() {
+		return dataAdmissao;
+	}
+
+	public void setDataAdmissao(Date dataAdmissao) {
+		this.dataAdmissao = dataAdmissao;
+	}
+
+}
