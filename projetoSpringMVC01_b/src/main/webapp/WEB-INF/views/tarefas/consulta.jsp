@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -57,7 +58,13 @@
 						</td>
 						<td>
 							<a href="/projetoSpringMVC01_b/tarefas-edicao?id=${item.idTarefa}" class="btn btn-primary btn-sm">Editar</a>
-							<a href="#" class="btn btn-danger btn-sm">Excluir</a>
+							
+							<a href="/projetoSpringMVC01_b/tarefas-exclusao?id=${item.idTarefa}"  
+								onclick="return confirm('Deseja realmente excluir a tarefa ${item.nome}?');"
+								class="btn btn-danger btn-sm">Excluir</a>
+
+								
+								
 						</td>
 					</tr>
 			 	</c:forEach>
@@ -77,15 +84,17 @@
 	<!-- adicionando referencia para as bibliotecas de JS (javascript) -->
 	<script src="resources/js/bootstrap.min.js"></script>
 	<script src="resources/js/jquery-3.6.0.min.js"></script>
-	<script src="resources/js/dataTables.min.js"></script>
+	<script src="resources/js/jquery.dataTables.min.js"></script>
 	
 	<script>
-		let table = new DataTable('#consulta-tarefas',{
-			language: {url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
-				}
-
+		$(document).ready(function() {
+			$('#consulta-tarefas').DataTable({
+		        language: {
+		            url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
+		        }
+		    });
 		});
-		
+  
 	</script>
 	
 </body>

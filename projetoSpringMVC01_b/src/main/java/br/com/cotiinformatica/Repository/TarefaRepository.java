@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import br.com.cotiinformatica.Intefaces.ITarefaRepository;
+import br.com.cotiinformatica.dtos.PrioridadeTarefaDTO;
 import br.com.cotiinformatica.entities.Tarefa;
+import br.com.cotiinformatica.entities.Usuario;
 import br.com.cotiinformatica.enums.PrioridadeTarefa;
 import br.com.cotiinformatica.helpers.DateHelper;
 
@@ -28,41 +30,29 @@ public class TarefaRepository implements ITarefaRepository {
 	@Override
 	public void create(Tarefa obj) throws Exception {
 
-		String query = "Insert into tarefa (nome, data, hora, descricao, prioridade) values (?,?,?,?,?)";
+		String query = "Insert into tarefa (nome, data, hora, descricao, prioridade, idusuario) values (?,?,?,?,?,?)";
 
-		Object[] params = { obj.getNome(), 
-							DateHelper.toString(obj.getData()), 
-							obj.getHora(), 
-							obj.getDescricao(), 
-							obj.getPrioridade().toString() };
+		Object[] params = { obj.getNome(), DateHelper.toString(obj.getData()), obj.getHora(), obj.getDescricao(),
+				obj.getPrioridade().toString(), obj.getUsuario().getIdUsuario() };
 
 		jdbcTemplate.update(query, params);
 	}
 
 	@Override
 	public void update(Tarefa obj) throws Exception {
-		String query = "Update tarefa set nome = ?, data = ? , hora=?, descricao=?, prioridade=? where idtarefa = ?";
+		String query = "Update tarefa set nome = ?, data = ? , hora=?, descricao=?, prioridade=? where idtarefa = ? and idusuario=?";
 
-		Object[] params = { obj.getNome(), 
-							DateHelper.toString(obj.getData()), 
-							obj.getHora(), 
-							obj.getDescricao(), 
-							obj.getPrioridade().toString(),
-							obj.getIdTarefa() };
+		Object[] params = { obj.getNome(), DateHelper.toString(obj.getData()), obj.getHora(), obj.getDescricao(),
+				obj.getPrioridade().toString(), obj.getIdTarefa(), obj.getUsuario().getIdUsuario() };
 
 		jdbcTemplate.update(query, params);
 	}
 
 	@Override
 	public void delete(Tarefa obj) throws Exception {
-		String query = "delete from tarefa where idtarefa = ?";
+		String query = "delete from tarefa where idtarefa = ? and idusuario= ?";
 
-		Object[] params = { obj.getNome(), 
-							DateHelper.toString(obj.getData()), 
-							obj.getHora(), 
-							obj.getDescricao(), 
-							obj.getPrioridade().toString(),
-							obj.getIdTarefa() };
+		Object[] params = { obj.getIdTarefa(), obj.getUsuario().getIdUsuario() };
 
 		jdbcTemplate.update(query, params);
 
@@ -109,10 +99,10 @@ public class TarefaRepository implements ITarefaRepository {
 	}
 
 	@Override
-	public List<Tarefa> getByDatas(Date dataMin, Date dataMax) throws Exception {
-		String query = "select * from tarefa where data between ? and ? order by data desc";
+	public List<Tarefa> getByDatas(Date dataMin, Date dataMax, Integer idUsuario) throws Exception {
+		String query = "select * from tarefa where data between ? and ? and idusuario = ? order by data desc";
 
-		Object[] params = { dataMin, dataMax };
+		Object[] params = { DateHelper.toString(dataMin), DateHelper.toString(dataMax), idUsuario };
 
 		List<Tarefa> lista = jdbcTemplate.query(query, params, new RowMapper<Tarefa>() {
 
@@ -127,11 +117,57 @@ public class TarefaRepository implements ITarefaRepository {
 		return lista;
 
 	}
+
+	@Override
+	public List<Tarefa> getByUsuario(Integer idUsuario) throws Exception {
+
+		String query = "Select * from tarefa where idusuario = ? order by data desc";
+
+		Object[] params = { idUsuario };
+
+		List<Tarefa> lista = jdbcTemplate.query(query, params, new RowMapper<Tarefa>() {
+
+			@Override
+			public Tarefa mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				return getTarefa(rs);
+			}
+
+		});
+
+		return lista;
+	}
 	
-	
+
+	@Override
+	public List<PrioridadeTarefaDTO> getGroupByPrioridade(Integer idUsuario) throws Exception {
+		
+		String query = "select 	prioridade,	count(prioridade) as quantidade	from tarefa	where idusuario = ?	group by prioridade;";
+
+		Object[] params = { idUsuario };
+
+		List<PrioridadeTarefaDTO> lista = jdbcTemplate.query(query, params, new RowMapper<PrioridadeTarefaDTO>() {
+
+			@Override
+			public PrioridadeTarefaDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			PrioridadeTarefaDTO dto = new PrioridadeTarefaDTO();	
+			dto.setPrioridade(rs.getString("prioridade"));
+			dto.setQuantidade(rs.getInt("quantidade"));
+			
+			return dto;
+			}
+
+		});
+
+		return lista;
+	}
+
+	// metodo usado para ler os dados dos usuarios
 	private Tarefa getTarefa(ResultSet rs) throws SQLException {
 
 		Tarefa tarefa = new Tarefa();
+		tarefa.setUsuario(new Usuario());
 
 		tarefa.setIdTarefa(rs.getInt("idtarefa"));
 		tarefa.setNome(rs.getString("nome"));
@@ -139,11 +175,9 @@ public class TarefaRepository implements ITarefaRepository {
 		tarefa.setHora(rs.getString("hora"));
 		tarefa.setDescricao(rs.getString("descricao"));
 		tarefa.setPrioridade(PrioridadeTarefa.valueOf(rs.getString("prioridade")));// para enum
+		tarefa.getUsuario().setIdUsuario(rs.getInt("idusuario"));
 
 		return tarefa;
 	}
-	
-	
-	
-	
+
 }

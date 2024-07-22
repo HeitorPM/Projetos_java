@@ -28,4 +28,10 @@ public class DateHelper {
 		return simpleDateFormat.format(data);
 	}
 	
+	public static String toStringPTBR(Date data) {
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E dd/MM/yyyy");
+		return simpleDateFormat.format(data);
+	}	
+	
 }

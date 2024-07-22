@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 
@@ -26,28 +27,23 @@
 		<h5>Relatório de tarefas</h5>
 		<br/>
 		
-		<form id= "form-relatorio" autocomplete = "off">
+		<form id= "form-relatorio" action="gerar-relatorio" method="post" autocomplete = "off">
 			<div class = "row">
 				<div class = "col-md-3">
 					<label>Data de Início:</label>
-					<input type="date" id="datamin" name= "datamin" class="form-control">
+					<form:input path="relatorio-dto.dataMin" type="date" id="dataMin" name= "dataMin" class="form-control"/>
 				</div>
 				<div class = "col-md-3">
 					<label>Data de término</label>
-					<input type="date" id="datamax" name = "datamax" class="form-control">
+					<form:input path="relatorio-dto.dataMax" type="date" id="dataMax" name = "dataMax" class="form-control"/>
 				</div>
 			</div>
 			<div class="row-mt-3">
 				<div class ="col-md-12">
 					<input type="submit" value="Gerar Relatório" class="btn btn-success">
-				
-				</div>
-			
+				</div>			
 			</div>
-			
-			
-		</form>
-		
+		</form>		
 	</div>
 
 
@@ -66,8 +62,8 @@
 			{
 				//regras de validação
 				rules : {
-					"datamin" : { required: true},
-					"datamax" : { required: true},					
+					"dataMin" : { required: true},
+					"dataMax" : { required: true},					
 				}
 			}		
 			

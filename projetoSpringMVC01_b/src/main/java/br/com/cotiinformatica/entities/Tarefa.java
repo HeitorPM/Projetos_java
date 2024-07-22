@@ -6,67 +6,67 @@ import br.com.cotiinformatica.enums.PrioridadeTarefa;
 
 public class Tarefa {
 
-	private Integer IdTarefa;
-	private String Nome;
-	private Date Data;
-	private String Hora;
-	private String Descricao;
+	private Integer idTarefa;
+	private String nome;
+	private Date data;
+	private String hora;
+	private String descricao;
 	private PrioridadeTarefa prioridade;
+	private Usuario usuario; // Associa��o (TER-1)
 
 	public Tarefa() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Tarefa(Integer idTarefa, String nome, Date data, String hora, String descricao,
 			PrioridadeTarefa prioridade) {
 		super();
-		IdTarefa = idTarefa;
-		Nome = nome;
-		Data = data;
-		Hora = hora;
-		Descricao = descricao;
+		this.idTarefa = idTarefa;
+		this.nome = nome;
+		this.data = data;
+		this.hora = hora;
+		this.descricao = descricao;
 		this.prioridade = prioridade;
 	}
 
 	public Integer getIdTarefa() {
-		return IdTarefa;
+		return idTarefa;
 	}
 
 	public void setIdTarefa(Integer idTarefa) {
-		IdTarefa = idTarefa;
+		this.idTarefa = idTarefa;
 	}
 
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	public Date getData() {
-		return Data;
+		return data;
 	}
 
 	public void setData(Date data) {
-		Data = data;
+		this.data = data;
 	}
 
 	public String getHora() {
-		return Hora;
+		return hora;
 	}
 
 	public void setHora(String hora) {
-		Hora = hora;
+		this.hora = hora;
 	}
 
 	public String getDescricao() {
-		return Descricao;
+		return descricao;
 	}
 
 	public void setDescricao(String descricao) {
-		Descricao = descricao;
+		this.descricao = descricao;
 	}
 
 	public PrioridadeTarefa getPrioridade() {
@@ -77,12 +77,17 @@ public class Tarefa {
 		this.prioridade = prioridade;
 	}
 
-	@Override
-	public String toString() {
-		return "Tarefa [IdTarefa=" + IdTarefa + ", Nome=" + Nome + ", Data=" + Data + ", Hora=" + Hora + ", Descricao="
-				+ Descricao + ", getIdTarefa()=" + getIdTarefa() + ", getNome()=" + getNome() + ", getData()="
-				+ getData() + ", getHora()=" + getHora() + ", getDescricao()=" + getDescricao() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	@Override
+	public String toString() {
+		return "Tarefa [idTarefa=" + idTarefa + ", nome=" + nome + ", data=" + data + ", hora=" + hora + ", descricao="
+				+ descricao + ", prioridade=" + prioridade + "]";
+	}
 }

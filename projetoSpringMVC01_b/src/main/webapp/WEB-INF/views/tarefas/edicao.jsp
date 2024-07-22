@@ -1,12 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EdiÃ§Ã£o</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Edição</title>
 
 <!-- adicionando referencia para as bibliotecas de CSS (folha de estilo) -->
 <link rel="stylesheet" href="resources/css/bootstrap.min.css" />
@@ -55,7 +55,7 @@
 			<!-- LINHA -->
 			<div class="row mt-3"> <!-- mt-2 margin top 2 -->
 				<div class ="col-md-6">				
-					<label>DescriÃ§Ã£o da tarefa:</label>
+					<label>Descrição da tarefa:</label>
 					<form:textarea path="tarefas-dto.descricao" id="descricao" name="descricao" class="form-control"></form:textarea>								
 				</div>
 				
@@ -63,7 +63,7 @@
 				<div class="col-md-3">
 					<label>Prioridade da tarefa:</label>
 					<form:select path="tarefas-dto.prioridade" id="prioridade" name="prioridade" class="form-select">
-						<option value = "">Escolha uma opÃ§Ã£o</option>
+						<option value = "">Escolha uma opção</option>
 						<form:options items="${prioridades}"/>
 					</form:select>	
 				</div>
@@ -73,7 +73,7 @@
 			<div class="row mt-3"> 
 				<div class ="col-md-6">				
 					<!-- botao -->
-					<input type = "submit" value = "Salvar alteraÃ§Ãµes" class="btn btn-success">
+					<input type = "submit" value = "Salvar alterações" class="btn btn-success">
 					<!-- botao -->
 					<a href="/projetoSpringMVC01_b/tarefas-consulta" class="btn btn-light">Cancelar</a>								
 				
@@ -89,12 +89,12 @@
 	<script src="resources/js/messages_pt_BR.min.js"></script>	
 	
 	<script>
-		//iniciando o jquery, quando a pagina abrir, faÃ§a
+		//iniciando o jquery, quando a pagina abrir, faça
 		$(document).ready(function(){
 			
 			$("#form-edicao").validate(
 			{
-				//regras de validaÃ§Ã£o
+				//regras de validação
 				rules : {
 					"nome" : { required: true, minlength: 6, maxlength: 150},
 					"data" : { required: true},

@@ -13,7 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.cotiinformatica.Intefaces.ITarefaRepository;
+import br.com.cotiinformatica.Intefaces.IUsuarioRepository;
 import br.com.cotiinformatica.Repository.TarefaRepository;
+import br.com.cotiinformatica.Repository.UsuarioRepository;
 
 @Configuration
 @ComponentScan(basePackages = "br.com.cotiinformatica")
@@ -56,6 +58,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public ITarefaRepository getITarefaRepository() {
 		return new TarefaRepository(getDataSource());
+	}
+	
+	@Bean
+	public IUsuarioRepository getIUsuarioRepository() {
+		return new UsuarioRepository(getDataSource());
 	}
 	
 
