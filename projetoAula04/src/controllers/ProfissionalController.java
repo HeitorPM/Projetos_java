@@ -5,7 +5,6 @@ import inputs.ProfissionalInput;
 import interfaces.IProfissionalRepository;
 
 public class ProfissionalController {
-
 	private IProfissionalRepository profissionalRepository;
 
 	public ProfissionalController() {
@@ -30,5 +29,4 @@ public class ProfissionalController {
 
 		profissionalRepository.exportarDados(profissional);
 	}
-
 }

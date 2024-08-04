@@ -29,40 +29,42 @@ public class Profissional {
 		return idProfissional;
 	}
 
-	public void setIdProfissional(Integer idProfissional) {
-		this.idProfissional = idProfissional;
-	}
-
 	public String getNome() {
 		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	public TipoContratacao getTipoContratacao() {
 		return tipoContratacao;
 	}
 
+	public void setIdProfissional(Integer idProfissional) {
+		this.idProfissional = idProfissional;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public void setTipoContratacao(TipoContratacao tipoContratacao) {
 		this.tipoContratacao = tipoContratacao;
 	}
+
+
 
 }
